@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html >
+	<head>
+		<title>Форма</title>
+		<meta charset="UTF-8" />
+		<style>.error{border-color:red}</style>
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="js/query.form.min.js"></script>
+		<script type="text/javascript">
+	$('document').ready(function(){
+		$('#form').validate(
+		{	
+			
+			rules:{
+				"title":{ required:true, email:true },
+				"text":{ required:true }
+			},
+			
+			messages:{
+				
+				"title":{ 
+				required:"<br/><span style='color:red;'>Обязательное поле!</a>", 
+				email: "<br/><span style='color:red;'>Неправильное мыло</a>" },
+				"text":{ required:"<br/><span style='color:red;'>Обязательное поле!</a>" }
+			},
+			
+			submitHandler: function(form){
+				$(form).ajaxSubmit({
+					target: '#result', 
+					success: function() { 
+						$('#FormBox').slideUp('fast'); 
+					} 
+				}); 
+			}
+		})
+		
+		
+	});
+</script>
+	</head>
+	<body>
+				<div id="result"></div>
+				<div id="FormBox"> 
+				<form id="form" action="php-obrabotka.php" method="post" >
+					<p><label>Заголовок</label><br/>
+					<input type="text" id="red" name="title" /></p>
+					<p><label>Текст</label><br/>
+					<textarea name="text" id="green"></textarea></p>
+					<p><input type="submit" id="proxyparse" value=" Отправить " /></p>
+				</form>
+				</div>
+				<button onclick="goBack()">Go Back</button>
+
+			<script>
+			function goBack() {
+				location.reload();
+			}
+			</script>
+	</body>
+</html>
